@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite + TS</title>
+        <link rel="stylesheet" href="./src/reset.css" />
+        <style>
+            #preloader {
+                background-image: url('./src/assets/images/preloader-bg.jpg');
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 100vh;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #preloader div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 4px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.24) 0%,
+                    rgba(255, 255, 255, 0.09) 100%
+                );
+                backdrop-filter: blur(7.5px);
+                padding: 160px 64px;
+            }
+
+            #content {
+                display: none;
+            }
+        </style>
+        <link rel="stylesheet" href="./src/style.scss" />
+    </head>
+    <body>
+        <div id="preloader">
+            <div>
+                <img
+                    src="./src/assets/images/preloader-logo.svg"
+                    alt="preloader"
+                />
+            </div>
+        </div>
+        <div id="content">
+            <div class="hero">
+                <div class="hero__content container">
+                    <img src="./src/assets/images/hero-logo.svg" alt="" />
+                    <hr class="hero__line" />
+                    <h1 class="hero__title">The gift you mentioned ...</h1>
+                    <p class="hero__desc">
+                        Genevieve Thorne, we're excited to show you the necklace
+                        you chose for your daughter. It's truly beautiful! See
+                        how it sparkles? We hope she loves this special gift.
+                        The delicate details and shine make it a perfect
+                        keepsake. We've packaged it with care, ready to bring
+                        her joy. Look how nice it is!
+                    </p>
+                </div>
+                <p class="hero__scroll">
+                    Scroll to see more
+                    <img src="./src/assets/images/arrow-down.svg" alt="arrow" />
+                </p>
+            </div>
+            <div class="main container">
+                <div class="main__wrapper">
+                    <div class="video">
+                        <div id="video" class="video__preload">
+                            <img
+                                src="./src/assets/images/icons/corner-icon.svg"
+                                alt="corner"
+                            />
+                            <button id="video__btn" class="video__btn">
+                                <img
+                                    src="./src/assets/images/icons/play-icon.svg"
+                                    alt="play"
+                                />
+                            </button>
+                            <img
+                                src="./src/assets/images/icons/corner-bottom-icon.svg"
+                                alt="corner"
+                            />
+                        </div>
+                        <video
+                            style="display: none"
+                            src="./src/assets/videos/noizemc.mp4"
+                            controls
+                            muted
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="product">
+                        <h2 class="product__title">Necklace</h2>
+                        <div class="product__info">
+                            <p>10 300 $</p>
+                            <p>20-83470</p>
+                        </div>
+                        <p class="product__desc">
+                            Elegant gold necklace featuring captivating purple
+                            stones. This exquisite piece combines the warmth of
+                            polished gold with the vibrant allure of deep purple
+                            gems. The delicate design highlights the stones'
+                            natural sparkle, creating a truly eye-catching
+                            accessory. Perfect for special occasions or everyday
+                            elegance, this necklace makes a cherished gift.
+                            Crafted with care, it's a timeless addition to any
+                            jewelry collection.
+                        </p>
+                        <button class="product__btn">
+                            Purchase
+                            <img
+                                src="./src/assets/images/icons/arrow-right.svg"
+                                alt="arrow"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
