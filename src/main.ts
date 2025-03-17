@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!context) return;
 
-        video.currentTime = 1;
+        video.currentTime = 5;
 
         video.addEventListener(
             'loadeddata',
