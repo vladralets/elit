@@ -52,23 +52,64 @@
         </div>
         <div id="content">
             <div class="hero">
-                <div class="hero__content container">
-                    <img src="./src/assets/images/hero-logo.svg" alt="" />
-                    <hr class="hero__line" />
-                    <h1 class="hero__title">The gift you mentioned ...</h1>
-                    <p class="hero__desc">
-                        Genevieve Thorne, we're excited to show you the necklace
-                        you chose for your daughter. It's truly beautiful! See
-                        how it sparkles? We hope she loves this special gift.
-                        The delicate details and shine make it a perfect
-                        keepsake. We've packaged it with care, ready to bring
-                        her joy. Look how nice it is!
+                <div class="container">
+                    <div class="hero__wrapper">
+                        <div class="hero__content">
+                            <img
+                                src="./src/assets/images/hero-logo.svg"
+                                alt=""
+                            />
+                            <hr class="hero__line" />
+                            <h1 class="hero__title">
+                                The gift you mentioned ...
+                            </h1>
+                            <p class="hero__desc">
+                                Genevieve Thorne, we're excited to show you the
+                                necklace you chose for your daughter. It's truly
+                                beautiful! See how it sparkles? We hope she
+                                loves this special gift. The delicate details
+                                and shine make it a perfect keepsake. We've
+                                packaged it with care, ready to bring her joy.
+                                Look how nice it is!
+                            </p>
+                        </div>
+                        <div class="hero__video">
+                            <div id="hero-video" class="hero__video-preload">
+                                <img
+                                    src="./src/assets/images/icons/corner-icon.svg"
+                                    alt="corner"
+                                />
+                                <button
+                                    id="hero-video__btn"
+                                    class="hero__video-btn"
+                                >
+                                    <img
+                                        src="./src/assets/images/icons/play-icon.svg"
+                                        alt="play"
+                                    />
+                                </button>
+                                <img
+                                    src="./src/assets/images/icons/corner-bottom-icon.svg"
+                                    alt="corner"
+                                />
+                            </div>
+                            <video
+                                style="display: none"
+                                src="./src/assets/videos/noizemc.mp4"
+                                controls
+                            >
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <p class="hero__scroll">
+                        Scroll to see more
+                        <img
+                            src="./src/assets/images/arrow-down.svg"
+                            alt="arrow"
+                        />
                     </p>
                 </div>
-                <p class="hero__scroll">
-                    Scroll to see more
-                    <img src="./src/assets/images/arrow-down.svg" alt="arrow" />
-                </p>
             </div>
             <div class="main container">
                 <div class="main__wrapper">
@@ -93,6 +134,7 @@
                             style="display: none"
                             src="./src/assets/videos/noizemc.mp4"
                             controls
+                            id="video"
                         >
                             Your browser does not support the video tag.
                         </video>
@@ -103,24 +145,26 @@
                             <p>10 300 $</p>
                             <p>20-83470</p>
                         </div>
-                        <p class="product__desc">
-                            Elegant gold necklace featuring captivating purple
-                            stones. This exquisite piece combines the warmth of
-                            polished gold with the vibrant allure of deep purple
-                            gems. The delicate design highlights the stones'
-                            natural sparkle, creating a truly eye-catching
-                            accessory. Perfect for special occasions or everyday
-                            elegance, this necklace makes a cherished gift.
-                            Crafted with care, it's a timeless addition to any
-                            jewelry collection.
-                        </p>
-                        <button class="product__btn">
-                            Purchase
-                            <img
-                                src="./src/assets/images/icons/arrow-right.svg"
-                                alt="arrow"
-                            />
-                        </button>
+                        <div class="product__content">
+                            <p class="product__desc">
+                                Elegant gold necklace featuring captivating purple
+                                stones. This exquisite piece combines the warmth of
+                                polished gold with the vibrant allure of deep purple
+                                gems. The delicate design highlights the stones'
+                                natural sparkle, creating a truly eye-catching
+                                accessory. Perfect for special occasions or everyday
+                                elegance, this necklace makes a cherished gift.
+                                Crafted with care, it's a timeless addition to any
+                                jewelry collection.
+                            </p>
+                            <button class="product__btn">
+                                Purchase
+                                <img
+                                    src="./src/assets/images/icons/arrow-right.svg"
+                                    alt="arrow"
+                                />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

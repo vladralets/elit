@@ -10,7 +10,7 @@
 $poppins: 'Poppins', sans-serif;
 $seasons: 'TheSeasons', sans-serif;
 
-$gold: #917E5A;
+$gold: #917e5a;
 $black: #233038;
 
 body {
@@ -22,6 +22,10 @@ body {
 .container {
     width: 311px;
     margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+        width: 584px;
+    }
 }
 
 .hero {
@@ -31,6 +35,12 @@ body {
     padding-top: 96px;
     padding-bottom: 124px;
     color: white;
+
+    &__wrapper {
+        @media screen and (min-width: 768px) {
+            position: relative;
+        }
+    }
 
     &__content {
         border-radius: 4px;
@@ -45,8 +55,13 @@ body {
         flex-direction: column;
         align-items: flex-start;
         margin-bottom: 168px;
-        z-index: 10;
         width: 280px;
+
+        @media screen and (min-width: 768px) {
+            position: sticky;
+            width: 270px;
+            z-index: 10;
+        }
     }
 
     &__line {
@@ -80,16 +95,56 @@ body {
         font-weight: 300;
         margin-top: 24px;
         animation: bounce 1.5s infinite ease-in-out;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        img {
+            margin-left: 8px;
+            animation: bounce-arrow 1.5s infinite ease-in-out;
+        }
     }
 
-    &__scroll img {
-        margin-left: 8px;
-        animation: bounce-arrow 1.5s infinite ease-in-out;
+    &__video {
+        display: none;
+        @media screen and (min-width: 768px) {
+            width: 311px;
+            height: 568px;
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: -460px;
+            z-index: 1;
+        }
+    }
+
+    &__video-preload {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    &__video-btn {
+        border-radius: 4px;
+        background: $gold;
+        border: none;
+        width: 56px;
+        height: 56px;
+        cursor: pointer;
+        z-index: 2;
     }
 }
 
 @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     50% {
@@ -98,7 +153,8 @@ body {
 }
 
 @keyframes bounce-arrow {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     50% {
@@ -112,6 +168,11 @@ body {
     &__wrapper {
         position: absolute;
         top: -70px;
+
+        @media screen and (min-width: 768px) {
+            position: relative;
+            top: 0;
+        }
     }
 }
 
@@ -124,6 +185,10 @@ body {
     align-items: center;
     position: relative;
     margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 
     &__preload {
         width: 100%;
@@ -188,6 +253,11 @@ body {
         color: $gold;
         font-size: 14px;
         font-weight: 300;
+
+        @media screen and (min-width: 768px) {
+            flex-direction: column;
+            gap: 6px;
+        }
     }
 
     &__desc {
@@ -195,11 +265,12 @@ body {
         font-weight: 300;
         font-size: 16px;
         line-height: 1.2;
+        width: 252px;
     }
 
     &__btn {
         cursor: pointer;
-        background-color: #FFF7EF;
+        background-color: #fff7ef;
         color: $gold;
         border: none;
         display: flex;
