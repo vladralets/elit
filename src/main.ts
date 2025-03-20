@@ -2,11 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader') as HTMLDivElement;
     const content = document.getElementById('content') as HTMLDivElement;
 
+    const getConentDisplayType = (): 'block' | 'grid' => {
+        const width = window.innerWidth;
+
+        if (width < 960) {
+            return "block";
+        } else {
+            return "grid";
+        }
+    };
+
     if (!preloader || !content) return;
 
     setTimeout(() => {
         preloader.style.display = 'none';
-        content.style.display = 'block';
+        content.style.display = getConentDisplayType();
     }, 2000);
 
     videoHandler();
@@ -125,7 +135,7 @@ const heroVideoHandler = () => {
 
         if (!context) return;
 
-        video.currentTime = 5;
+        video.currentTime = 1;
 
         video.addEventListener(
             'loadeddata',
