@@ -215,5 +215,5 @@ const purchaseBtn = document.querySelector(
 ) as HTMLButtonElement;
 
 purchaseBtn.addEventListener('click', () => {
-    alert('It is a demo version of the site. You cannot buy anything yet.');
+    window.location.href = '/cart.html';
 });
