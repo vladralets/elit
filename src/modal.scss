@@ -53,6 +53,7 @@ $seasons: 'TheSeasons', sans-serif;
             padding: 8px 0;
             font-size: 16px;
             color: #917e5a;
+            cursor: pointer;
         }
 
         #close-modal {
@@ -70,6 +71,7 @@ $seasons: 'TheSeasons', sans-serif;
             top: -20px;
             right: -20px;
             z-index: 20;
+            cursor: pointer;
 
             img {
                 width: 24px;
