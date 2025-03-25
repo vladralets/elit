@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./src/reset.css" />
         <link rel="stylesheet" href="./src/style.scss" />
+        <link rel="stylesheet" href="./src/modal.scss">
     </head>
     <body>
         <header class="header">
@@ -37,8 +38,8 @@
                 </div>
               </a>
               <div class="cart__btns">
-                <button>Proceed to checkout</button>
-                <button>See product informations</button>
+                <button id="checkout-btn">Proceed to checkout</button>
+                <button id="info-btn">See product informations</button>
               </div>
             </div>
         </main>
@@ -57,5 +58,19 @@
                 </nav>
             </div>
         </footer>
+        <div class="modal" style="display: none;">
+            <div class="modal__wrapper container">
+                <img src="./src/assets/images/visiodom-logo.svg" alt="logo">
+                <hr>
+                <p>
+                    Future of<br> luxury remote selling.
+                </p>
+                <button id="show-more">See more</button>
+                <button id="close-modal">
+                    <img src="./src/assets/images//icons/close-icon.svg" alt="close">
+                </button>
+            </div>
+        </div>
+        <script src="./src/cart.ts"></script>
     </body>
 </html>
