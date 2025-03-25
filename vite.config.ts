@@ -10,6 +10,7 @@ export default defineConfig({
                 cart: path.resolve(__dirname, 'cart.html'),
                 product: path.resolve(__dirname, 'product.html'),
                 chat: path.resolve(__dirname, 'chat.html'),
+                cartTs: path.resolve(__dirname, 'src/cart.ts'),
             },
         },
     },
