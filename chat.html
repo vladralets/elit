@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./src/reset.css" />
+        <link rel="stylesheet" href="./src/style.scss" />
+        <link rel="stylesheet" href="./src/chat.scss" />
+    </head>
+    <body>
+        <div class="chat">
+            <div>
+                <div class="container">
+                    <h1 class="chat__title">Chat</h1>
+                </div>
+                <div class="chat__header">
+                    <div class="container">
+                        <div class="chat__assistant">
+                            <img
+                                src="./src/assets/images/assistant.svg"
+                                alt="assistant"
+                            />
+                            <div>
+                                <p>Patricia Walker</p>
+                                <p>Your sales assistant</p>
+                            </div>
+                        </div>
+                        <div class="chat__product">
+                            <img
+                                src="./src/assets/images/product.jpg"
+                                alt="product"
+                            />
+                            <div>
+                                <p>Necklace</p>
+                                <p>06-38472</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat__messages container">
+                <div class="chat__history">
+                    <p class="chat__custommer-message">
+                        Hello Patricia, the necklace looks amazing.I think my
+                        wife will be happy. May I ask you for some special
+                        packaging and send it to my office address?
+                    </p>
+                    <p class="chat__assistant-message">
+                        Hello Mr. Smith, sure we can do it. Which color would
+                        she appreciate more, red or purple?
+                    </p>
+                </div>
+                <div class="chat__input">
+                    <input type="text" placeholder="Type your message" value="Purple, thank you."/>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

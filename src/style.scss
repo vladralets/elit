@@ -12,13 +12,13 @@ $seasons: 'TheSeasons', sans-serif;
 
 $gold: #917e5a;
 $black: #233038;
+$lightGold: #fff7ef;
 
 body {
     font-family: $poppins;
     margin: 0;
     padding: 0;
     height: 100vh;
-    position: relative;
 }
 
 .container {
@@ -244,7 +244,7 @@ body {
     position: relative;
 
     &__wrapper {
-        position: absolute;
+        position: relative;
         top: -70px;
 
         @media screen and (min-width: 768px) {
@@ -396,6 +396,122 @@ body {
     }
 }
 
+.contacts {
+    display: none;
+    position: absolute;
+    bottom: -30px;
+    width: 312px;
+    right: -329px;
+    background-color: $lightGold;
+    padding: 24px 0;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+    }
+
+    @media screen and (min-width: 1440px) {
+        position: static;
+        margin-top: 80px;
+    }
+
+
+    &__info {
+        display: flex;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            margin-left: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        p:last-of-type {
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
+
+    &__btns {
+        display: flex;
+        gap: 16px;
+        width: 312px;
+        padding: 0 16px;
+
+        button {
+            background-color: white;
+            color: $gold;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-radius: 2px;
+            width: 40%;
+        }
+    }
+}
+
+.contacts__mob {
+    background-color: $lightGold;
+    padding: 32px 0;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            margin-left: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        p:last-of-type {
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
+
+    &__btns {
+        display: flex;
+        gap: 16px;
+        margin-top: 16px;
+
+        button {
+            background-color: white;
+            color: $gold;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-radius: 2px;
+            width: 50%;
+        }
+    }
+}
+
 .header {
     .container {
         display: flex;
@@ -509,7 +625,7 @@ body {
 
         button {
             background-color: $gold;
-            color: #FFF7EF;
+            color: $lightGold;
             border: none;
             padding: 8px;
             cursor: pointer;
@@ -517,7 +633,7 @@ body {
             padding: 8px 0;
 
             &:last-of-type {
-                background-color: #FFF7EF;
+                background-color: $lightGold;
                 color: $gold;
             }
         }

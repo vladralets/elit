@@ -217,3 +217,13 @@ const purchaseBtn = document.querySelector(
 purchaseBtn.addEventListener('click', () => {
     window.location.href = '/cart.html';
 });
+
+
+const chatBtn = document.querySelectorAll('.chat') as NodeListOf<HTMLDivElement>;
+
+chatBtn.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        window.location.href = '/chat.html';
+    });
+});
+
