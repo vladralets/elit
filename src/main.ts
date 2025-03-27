@@ -254,7 +254,6 @@ const heroVideoHandler = () => {
     captureThumbnail();
 };
 
-// Product section
 const purchaseBtn = document.querySelector(
     '.product__btn'
 ) as HTMLButtonElement;
