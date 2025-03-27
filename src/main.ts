@@ -1,8 +1,56 @@
-
+import {getInfoFromCollection} from './firebase';
 
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader') as HTMLDivElement;
     const content = document.getElementById('content') as HTMLDivElement;
+
+    const productId = new URLSearchParams(window.location.search).get('id');
+    if (!productId) {
+        console.error('Product ID not found in URL');
+        return;
+    }
+
+    getInfoFromCollection(productId)
+        .then((data) => {
+            if (data.length === 0) {
+                console.error('No product data found');
+                return;
+            }
+
+            const product = data[0];
+
+            const messageTitle = document.querySelector('.hero__title') as HTMLHeadingElement;
+            messageTitle.innerText = product.messageTitle;
+            const messageBody = document.querySelector('.hero__desc') as HTMLParagraphElement;
+            messageBody.innerText = product.messageBody;
+
+            const prodName = document.querySelector('.product__title') as HTMLHeadingElement;
+            prodName.innerText = product.prodName;
+            const prodDesc = document.querySelector('.product__desc') as HTMLParagraphElement;
+            prodDesc.innerText = product.prodDesc;
+            const prodPrice = document.querySelector('.product__price') as HTMLSpanElement;
+            prodPrice.innerText = product.prodPrice.toString() + '€';
+            const prodId = document.querySelector(
+                '.product__code'
+            ) as HTMLVideoElement;
+            prodId.innerText = product.prodId;
+
+            const assistant__name =
+                document.querySelectorAll('.assistant__name') as NodeListOf<HTMLSpanElement>;
+            assistant__name.forEach((name) => {
+                name.innerText = product.salesName;
+            }
+            );
+
+        })
+        .catch((error) => {
+            console.error('Error fetching product data:', error);
+        })
+        .finally(() => {
+            preloader.style.display = 'none';
+            content.style.display = getConentDisplayType();
+        });
+    
 
     const getConentDisplayType = (): 'block' | 'grid' => {
         const width = window.innerWidth;
@@ -15,11 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (!preloader || !content) return;
-
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        content.style.display = getConentDisplayType();
-    }, 2000);
 
     videoHandler();
     heroVideoHandler();
