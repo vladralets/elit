@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const prodDesc = document.querySelector('.product__desc') as HTMLParagraphElement;
             prodDesc.innerText = product.prodDesc;
             const prodPrice = document.querySelector('.product__price') as HTMLSpanElement;
-            prodPrice.innerText = product.prodPrice.toString() + '€';
+            prodPrice.innerText = product.prodPrice.toString() + ' €';
             const prodId = document.querySelector(
                 '.product__code'
             ) as HTMLVideoElement;
