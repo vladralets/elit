@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const product = data[0];
 
+            const metaImage = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
+            if (metaImage) {
+                metaImage.content = product.metaImgUrl;
+            }
+            
+
             const messageTitle = document.querySelector('.hero__title') as HTMLHeadingElement;
             messageTitle.innerText = product.messageTitle;
             const messageBody = document.querySelector('.hero__desc') as HTMLParagraphElement;

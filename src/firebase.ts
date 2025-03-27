@@ -12,6 +12,7 @@ export type ProductMessage = {
     salesId: string;
     prodName: string;
     prodId: string;
+    metaImgUrl: string;
 }
 
 export type Product = ProductMessage & {
