@@ -1,229 +1,235 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const preloader = document.getElementById('preloader') as HTMLDivElement;
-    const content = document.getElementById('content') as HTMLDivElement;
+import { getInfoFromCollection } from './firebase';
 
-    const getConentDisplayType = (): 'block' | 'grid' => {
-        const width = window.innerWidth;
-
-        if (width < 960) {
-            return "block";
-        } else {
-            return "grid";
-        }
-    };
-
-    if (!preloader || !content) return;
-
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        content.style.display = getConentDisplayType();
-    }, 2000);
-
-    videoHandler();
-    heroVideoHandler();
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('[vite] connecting...');
+    await getInfoFromCollection();
+    console.log('[vite] connected.');
 });
 
-const videoHandler = () => {
-    const videoBtn = document.getElementById('video__btn') as HTMLButtonElement;
-    const videoContainer = document.getElementById('video') as HTMLDivElement;
-    const video = document.querySelector('.video video') as HTMLVideoElement;
-    const preloadDiv = document.querySelector(
-        '.video__preload'
-    ) as HTMLDivElement;
+// document.addEventListener('DOMContentLoaded', () => {
+//     const preloader = document.getElementById('preloader') as HTMLDivElement;
+//     const content = document.getElementById('content') as HTMLDivElement;
 
-    if (!videoBtn || !videoContainer || !video || !preloadDiv) return;
+//     const getConentDisplayType = (): 'block' | 'grid' => {
+//         const width = window.innerWidth;
 
-    let isSeeking = false;
-    let isFullscreen = false;
+//         if (width < 960) {
+//             return "block";
+//         } else {
+//             return "grid";
+//         }
+//     };
 
-    const captureThumbnail = () => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
+//     if (!preloader || !content) return;
 
-        if (!context) return;
+//     setTimeout(() => {
+//         preloader.style.display = 'none';
+//         content.style.display = getConentDisplayType();
+//     }, 2000);
 
-        video.currentTime = 5;
+//     videoHandler();
+//     heroVideoHandler();
+// });
 
-        video.addEventListener(
-            'loadeddata',
-            () => {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+// const videoHandler = () => {
+//     const videoBtn = document.getElementById('video__btn') as HTMLButtonElement;
+//     const videoContainer = document.getElementById('video') as HTMLDivElement;
+//     const video = document.querySelector('.video video') as HTMLVideoElement;
+//     const preloadDiv = document.querySelector(
+//         '.video__preload'
+//     ) as HTMLDivElement;
 
-                const imgDataUrl = canvas.toDataURL('image/jpeg');
-                preloadDiv.style.backgroundImage = `url(${imgDataUrl})`;
-            },
-            { once: true }
-        );
+//     if (!videoBtn || !videoContainer || !video || !preloadDiv) return;
 
-        video.load();
-    };
+//     let isSeeking = false;
+//     let isFullscreen = false;
 
-    const openVideo = () => {
-        videoContainer.style.display = 'none';
-        video.style.display = 'block';
-        video.play();
+//     const captureThumbnail = () => {
+//         const canvas = document.createElement('canvas');
+//         const context = canvas.getContext('2d');
 
-        isFullscreen = true;
+//         if (!context) return;
 
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if ((video as any).webkitRequestFullscreen) {
-            (video as any).webkitRequestFullscreen();
-        } else if ((video as any).msRequestFullscreen) {
-            (video as any).msRequestFullscreen();
-        }
-    };
+//         video.currentTime = 5;
 
-    const closeVideo = () => {
-        if (isSeeking || isFullscreen) return;
-        video.pause();
-        video.style.display = 'none';
-        videoContainer.style.display = 'flex';
-    };
+//         video.addEventListener(
+//             'loadeddata',
+//             () => {
+//                 canvas.width = video.videoWidth;
+//                 canvas.height = video.videoHeight;
+//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    videoBtn.addEventListener('click', openVideo);
+//                 const imgDataUrl = canvas.toDataURL('image/jpeg');
+//                 preloadDiv.style.backgroundImage = `url(${imgDataUrl})`;
+//             },
+//             { once: true }
+//         );
 
-    [
-        'fullscreenchange',
-        'webkitfullscreenchange',
-        'msfullscreenchange',
-    ].forEach((event) => {
-        document.addEventListener(event, () => {
-            isFullscreen = !!document.fullscreenElement;
-            if (!isFullscreen) closeVideo();
-        });
-    });
+//         video.load();
+//     };
 
-    video.addEventListener('pause', () => {
-        if (!isSeeking && !isFullscreen) closeVideo();
-    });
+//     const openVideo = () => {
+//         videoContainer.style.display = 'none';
+//         video.style.display = 'block';
+//         video.play();
 
-    video.addEventListener('seeking', () => {
-        isSeeking = true;
-    });
+//         isFullscreen = true;
 
-    video.addEventListener('seeked', () => {
-        isSeeking = false;
-    });
+//         if (video.requestFullscreen) {
+//             video.requestFullscreen();
+//         } else if ((video as any).webkitRequestFullscreen) {
+//             (video as any).webkitRequestFullscreen();
+//         } else if ((video as any).msRequestFullscreen) {
+//             (video as any).msRequestFullscreen();
+//         }
+//     };
 
-    video.addEventListener('ended', () => {
-        isFullscreen = false;
-        closeVideo();
-    });
+//     const closeVideo = () => {
+//         if (isSeeking || isFullscreen) return;
+//         video.pause();
+//         video.style.display = 'none';
+//         videoContainer.style.display = 'flex';
+//     };
 
-    captureThumbnail();
-};
+//     videoBtn.addEventListener('click', openVideo);
 
-const heroVideoHandler = () => {
-    const videoBtn = document.getElementById('hero-video__btn') as HTMLButtonElement;
-    const videoContainer = document.getElementById('hero-video') as HTMLDivElement;
-    const video = document.querySelector('.hero__video video') as HTMLVideoElement;
-    const preloadDiv = document.querySelector(
-        '.hero__video-preload'
-    ) as HTMLDivElement;
+//     [
+//         'fullscreenchange',
+//         'webkitfullscreenchange',
+//         'msfullscreenchange',
+//     ].forEach((event) => {
+//         document.addEventListener(event, () => {
+//             isFullscreen = !!document.fullscreenElement;
+//             if (!isFullscreen) closeVideo();
+//         });
+//     });
 
-    if (!videoBtn || !videoContainer || !video || !preloadDiv) return;
+//     video.addEventListener('pause', () => {
+//         if (!isSeeking && !isFullscreen) closeVideo();
+//     });
 
-    let isSeeking = false;
-    let isFullscreen = false;
+//     video.addEventListener('seeking', () => {
+//         isSeeking = true;
+//     });
 
-    const captureThumbnail = () => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
+//     video.addEventListener('seeked', () => {
+//         isSeeking = false;
+//     });
 
-        if (!context) return;
+//     video.addEventListener('ended', () => {
+//         isFullscreen = false;
+//         closeVideo();
+//     });
 
-        video.currentTime = 1;
+//     captureThumbnail();
+// };
 
-        video.addEventListener(
-            'loadeddata',
-            () => {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+// const heroVideoHandler = () => {
+//     const videoBtn = document.getElementById('hero-video__btn') as HTMLButtonElement;
+//     const videoContainer = document.getElementById('hero-video') as HTMLDivElement;
+//     const video = document.querySelector('.hero__video video') as HTMLVideoElement;
+//     const preloadDiv = document.querySelector(
+//         '.hero__video-preload'
+//     ) as HTMLDivElement;
 
-                const imgDataUrl = canvas.toDataURL('image/jpeg');
-                preloadDiv.style.backgroundImage = `url(${imgDataUrl})`;
-            },
-            { once: true }
-        );
+//     if (!videoBtn || !videoContainer || !video || !preloadDiv) return;
 
-        video.load();
-    };
+//     let isSeeking = false;
+//     let isFullscreen = false;
 
-    const openVideo = () => {
-        videoContainer.style.display = 'none';
-        video.style.display = 'block';
-        video.play();
+//     const captureThumbnail = () => {
+//         const canvas = document.createElement('canvas');
+//         const context = canvas.getContext('2d');
 
-        isFullscreen = true;
+//         if (!context) return;
 
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if ((video as any).webkitRequestFullscreen) {
-            (video as any).webkitRequestFullscreen();
-        } else if ((video as any).msRequestFullscreen) {
-            (video as any).msRequestFullscreen();
-        }
-    };
+//         video.currentTime = 1;
 
-    const closeVideo = () => {
-        if (isSeeking || isFullscreen) return;
-        video.pause();
-        video.style.display = 'none';
-        videoContainer.style.display = 'flex';
-    };
+//         video.addEventListener(
+//             'loadeddata',
+//             () => {
+//                 canvas.width = video.videoWidth;
+//                 canvas.height = video.videoHeight;
+//                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    videoBtn.addEventListener('click', openVideo);
+//                 const imgDataUrl = canvas.toDataURL('image/jpeg');
+//                 preloadDiv.style.backgroundImage = `url(${imgDataUrl})`;
+//             },
+//             { once: true }
+//         );
 
-    [
-        'fullscreenchange',
-        'webkitfullscreenchange',
-        'msfullscreenchange',
-    ].forEach((event) => {
-        document.addEventListener(event, () => {
-            isFullscreen = !!document.fullscreenElement;
-            if (!isFullscreen) closeVideo();
-        });
-    });
+//         video.load();
+//     };
 
-    video.addEventListener('pause', () => {
-        if (!isSeeking && !isFullscreen) closeVideo();
-    });
+//     const openVideo = () => {
+//         videoContainer.style.display = 'none';
+//         video.style.display = 'block';
+//         video.play();
 
-    video.addEventListener('seeking', () => {
-        isSeeking = true;
-    });
+//         isFullscreen = true;
 
-    video.addEventListener('seeked', () => {
-        isSeeking = false;
-    });
+//         if (video.requestFullscreen) {
+//             video.requestFullscreen();
+//         } else if ((video as any).webkitRequestFullscreen) {
+//             (video as any).webkitRequestFullscreen();
+//         } else if ((video as any).msRequestFullscreen) {
+//             (video as any).msRequestFullscreen();
+//         }
+//     };
 
-    video.addEventListener('ended', () => {
-        isFullscreen = false;
-        closeVideo();
-    });
+//     const closeVideo = () => {
+//         if (isSeeking || isFullscreen) return;
+//         video.pause();
+//         video.style.display = 'none';
+//         videoContainer.style.display = 'flex';
+//     };
 
-    captureThumbnail();
-};
+//     videoBtn.addEventListener('click', openVideo);
 
-// Product section
-const purchaseBtn = document.querySelector(
-    '.product__btn'
-) as HTMLButtonElement;
+//     [
+//         'fullscreenchange',
+//         'webkitfullscreenchange',
+//         'msfullscreenchange',
+//     ].forEach((event) => {
+//         document.addEventListener(event, () => {
+//             isFullscreen = !!document.fullscreenElement;
+//             if (!isFullscreen) closeVideo();
+//         });
+//     });
 
-purchaseBtn.addEventListener('click', () => {
-    window.location.href = '/cart.html';
-});
+//     video.addEventListener('pause', () => {
+//         if (!isSeeking && !isFullscreen) closeVideo();
+//     });
 
+//     video.addEventListener('seeking', () => {
+//         isSeeking = true;
+//     });
 
-const chatBtn = document.querySelectorAll('.chat') as NodeListOf<HTMLDivElement>;
+//     video.addEventListener('seeked', () => {
+//         isSeeking = false;
+//     });
 
-chatBtn.forEach((btn) => {
-    btn.addEventListener('click', () => {
-        window.location.href = '/chat.html';
-    });
-});
+//     video.addEventListener('ended', () => {
+//         isFullscreen = false;
+//         closeVideo();
+//     });
 
+//     captureThumbnail();
+// };
+
+// // Product section
+// const purchaseBtn = document.querySelector(
+//     '.product__btn'
+// ) as HTMLButtonElement;
+
+// purchaseBtn.addEventListener('click', () => {
+//     window.location.href = '/cart.html';
+// });
+
+// const chatBtn = document.querySelectorAll('.chat') as NodeListOf<HTMLDivElement>;
+
+// chatBtn.forEach((btn) => {
+//     btn.addEventListener('click', () => {
+//         window.location.href = '/chat.html';
+//     });
+// });
