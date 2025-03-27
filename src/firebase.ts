@@ -20,7 +20,7 @@ export const db = initializeFirestore(app, {
 
 export const getInfoFromCollection = async () => {
     try {
-        const collectionRef = collection(db, 'product'); // ⚠️ у тебя была ошибка: products ❌
+        const collectionRef = collection(db, 'product');
         const snapshot = await getDocs(collectionRef);
         const data = snapshot.docs.map((doc) => ({
             id: doc.id,
