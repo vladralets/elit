@@ -19,10 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const product = data[0];
 
-            const metaImage = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
-            if (metaImage) {
-                metaImage.content = product.metaImgUrl;
-            }
+            const metaImage = document.querySelector(
+                'meta[property="og:image"]'
+            ) as HTMLMetaElement;
+            metaImage.content = product.metaImgUrl;
+
+            const metaTitle = document.querySelector(
+                'meta[property="og:title"]'
+            ) as HTMLMetaElement;
+            metaTitle.content = product.prodName;
+            document.title = product.prodName;
+
+            const metaDescription = document.querySelector(
+                'meta[property="og:description"]'
+            ) as HTMLMetaElement;
+            metaDescription.content = product.prodDesc;
             
 
             const messageTitle = document.querySelector('.hero__title') as HTMLHeadingElement;
@@ -170,12 +181,12 @@ const videoHandler = () => {
 const heroVideoHandler = () => {
     const videoBtn = document.getElementById('hero-video__btn') as HTMLButtonElement;
     const videoContainer = document.getElementById('hero-video') as HTMLDivElement;
-    const video = document.querySelector('.hero__video video') as HTMLVideoElement;
+    const heroVideo = document.querySelector('.hero__video video') as HTMLVideoElement;
     const preloadDiv = document.querySelector(
         '.hero__video-preload'
     ) as HTMLDivElement;
 
-    if (!videoBtn || !videoContainer || !video || !preloadDiv) return;
+    if (!videoBtn || !videoContainer || !heroVideo || !preloadDiv) return;
 
     let isSeeking = false;
     let isFullscreen = false;
@@ -186,14 +197,14 @@ const heroVideoHandler = () => {
 
         if (!context) return;
 
-        video.currentTime = 1;
+        heroVideo.currentTime = 1;
 
-        video.addEventListener(
+        heroVideo.addEventListener(
             'loadeddata',
             () => {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                canvas.width = heroVideo.videoWidth;
+                canvas.height = heroVideo.videoHeight;
+                context.drawImage(heroVideo, 0, 0, canvas.width, canvas.height);
 
                 const imgDataUrl = canvas.toDataURL('image/jpeg');
                 preloadDiv.style.backgroundImage = `url(${imgDataUrl})`;
@@ -201,29 +212,29 @@ const heroVideoHandler = () => {
             { once: true }
         );
 
-        video.load();
+        heroVideo.load();
     };
 
     const openVideo = () => {
         videoContainer.style.display = 'none';
-        video.style.display = 'block';
-        video.play();
+        heroVideo.style.display = 'block';
+        heroVideo.play();
 
         isFullscreen = true;
 
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if ((video as any).webkitRequestFullscreen) {
-            (video as any).webkitRequestFullscreen();
-        } else if ((video as any).msRequestFullscreen) {
-            (video as any).msRequestFullscreen();
+        if (heroVideo.requestFullscreen) {
+            heroVideo.requestFullscreen();
+        } else if ((heroVideo as any).webkitRequestFullscreen) {
+            (heroVideo as any).webkitRequestFullscreen();
+        } else if ((heroVideo as any).msRequestFullscreen) {
+            (heroVideo as any).msRequestFullscreen();
         }
     };
 
     const closeVideo = () => {
         if (isSeeking || isFullscreen) return;
-        video.pause();
-        video.style.display = 'none';
+        heroVideo.pause();
+        heroVideo.style.display = 'none';
         videoContainer.style.display = 'flex';
     };
 
@@ -240,19 +251,19 @@ const heroVideoHandler = () => {
         });
     });
 
-    video.addEventListener('pause', () => {
+    heroVideo.addEventListener('pause', () => {
         if (!isSeeking && !isFullscreen) closeVideo();
     });
 
-    video.addEventListener('seeking', () => {
+    heroVideo.addEventListener('seeking', () => {
         isSeeking = true;
     });
 
-    video.addEventListener('seeked', () => {
+    heroVideo.addEventListener('seeked', () => {
         isSeeking = false;
     });
 
-    video.addEventListener('ended', () => {
+    heroVideo.addEventListener('ended', () => {
         isFullscreen = false;
         closeVideo();
     });
